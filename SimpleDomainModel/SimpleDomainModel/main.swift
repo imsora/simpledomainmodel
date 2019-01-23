@@ -28,11 +28,14 @@ public struct Money {
   public var currency : String
   
   public func convert(_ to: String) -> Money {
+    return self
   }
   
   public func add(_ to: Money) -> Money {
+    return self
   }
   public func subtract(_ from: Money) -> Money {
+    return self
   }
 }
 
@@ -49,12 +52,18 @@ open class Job {
   }
   
   public init(title : String, type : JobType) {
+    self.title = title; self.type = type
   }
   
   open func calculateIncome(_ hours: Int) -> Int {
+    return -1
   }
   
-  open func raise(_ amt : Double) {
+  /* raise(byAmount:) sets the new amount to the current rate + amt */
+  open func raise(byAmount amt : Double) {
+  }
+  /* raise(byPercent:) sets the new amount to the current rate + (current * pcnt) */
+  open func raise(byPercent pcnt : Double) {
   }
 }
 
@@ -62,20 +71,20 @@ open class Job {
 // Person
 //
 open class Person {
-  open var firstName : String = ""
-  open var lastName : String = ""
-  open var age : Int = 0
+  open var firstName = ""
+  open var lastName = ""
+  open var age = 0
 
   fileprivate var _job : Job? = nil
   open var job : Job? {
-    get { }
+    get { return _job }
     set(value) {
     }
   }
   
   fileprivate var _spouse : Person? = nil
   open var spouse : Person? {
-    get { }
+    get { return _spouse }
     set(value) {
     }
   }
@@ -87,6 +96,7 @@ open class Person {
   }
   
   open func toString() -> String {
+    return ""
   }
 }
 
@@ -100,9 +110,11 @@ open class Family {
   }
   
   open func haveChild(_ child: Person) -> Bool {
+    return false
   }
   
   open func householdIncome() -> Int {
+    return -1
   }
 }
 
