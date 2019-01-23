@@ -43,10 +43,16 @@ of it. Such is what we do in programming.)
 ***NOTE:*** Where the tests might disagree with the spec written below, the tests win! (In other
 words, your goal is to make the tests pass, regardless of what the spec says.)
 
+***NOTE:*** After cloning the project, you should be able to run the tests (Cmd-U); note that some
+of the tests will pass, despite the implementation being missing! In some cases, this is due to
+bad tests. For an extra credit point, email myself and the TA with your suggestions on how the
+tests might be improved to prevent false positives like these from coming through.
+
 ### Money
 To start, you will need to create a Money type (a struct). It will need two properties, `amount`
 and `currency`, since money is different in different cultures. (We will be ignoring fractional
-amounts like pennies for simplicity's sake.) The `amount` should be an Int and the `currency`
+amounts like pennies for simplicity's sake; round up or down to the appropriate whole number when
+working with a fractional amount.) The `amount` should be an Int and the `currency`
 should be a String--make sure to include code to reject unknown currencies. Acceptable currencies
 are "USD", "GBP" (British pounds), "EUR" (Euro) and "CAN" (Canadian dollars, also known in the
 US as "funny money").
@@ -64,7 +70,10 @@ Exchange rates are as follows:
 
 * 1 USD = 1.25 CAN / 4 USD = 5 CAN
 
-You will need to work out the rest of the math on your own.
+You will need to work out the rest of the math on your own. (Or, pro tip, "normalize" all
+currency conversions on USD--in other words, when converting from EUR to CAN, convert the
+EUR to USD and from there to CAN. It's less efficient, but it's also less complicated. You
+will not be graded by efficiency, only whether the tests pass.)
 
 All of the Money tests are in MoneyTests.swift, if you want to see what's tested.
 
@@ -83,7 +92,8 @@ The two methods you must provide are:
   (Interesting and important note for job seekers: assuming you get two weeks' off during the 
   year, there are 50 weeks * 40 hours/week, or 2000 working hours in a given calendar year.)
 
-* `raise`, which should bump the amount of the Salary or the Hourly by the given amount.
+* `raise`, which should bump the amount of the Salary or the Hourly by the given amount, and/or
+  by the given percentage. (In other words, `raise` should be overloaded by parameter name.)
 
 All of the Job tests are in JobTests.swift, if you want to see what's tested.
 
@@ -123,7 +133,9 @@ parameters each have no spouse, and set their respective `spouse` fields to each
 
 Next, flesh out the `haveChild` method, which takes a Person parameter to add to the family.
 However, US law also frowns on minors having children, so let's make sure that at least one
-Person of the two spouses is over the age of 21.
+Person of the two spouses is over the age of 21. If the Family cannot have a child, then this
+method should return `false`; this method should return `true` only if the child can be
+successfully added to the Family.
 
 Finally, the `householdIncome` method will calculate the complete income for the Family.
 
