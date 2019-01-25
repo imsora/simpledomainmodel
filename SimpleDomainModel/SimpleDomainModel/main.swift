@@ -203,10 +203,7 @@ open class Family {
   open func householdIncome() -> Int {
     var income : Int = 0
     for mem in members {
-        let memIncome = mem.job?.calculateIncome(2000)
-        if memIncome != nil {
-            income += memIncome!
-        }
+        income += mem.job?.calculateIncome(2000) ?? 0
     }
     return income
   }
